@@ -1,7 +1,8 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { getQuestions } from '../api';
-import { QuestionListItem } from '../types';
+import type { QuestionListItem } from '../types';
 
 export function QuestionBankPage() {
   const [questions, setQuestions] = useState<QuestionListItem[]>([]);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getTopics } from '../api';
-import { Topic } from '../types';
+import type { Topic } from '../types';
 
 export function TopicsPage() {
   const [topics, setTopics] = useState<Topic[]>([]);

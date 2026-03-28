@@ -1,7 +1,8 @@
-import { FormEvent, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import type { FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
 import { getQuiz, submitQuiz } from '../api';
-import { QuizDetail, QuizQuestion } from '../types';
+import type { QuizDetail, QuizQuestion } from '../types';
 import { useAuth } from '../auth';
 
 export function QuizDetailPage() {

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getDashboard } from '../api';
 import { useAuth } from '../auth';
-import { DashboardData } from '../types';
+import type { DashboardData } from '../types';
 
 export function DashboardPage() {
   const { user } = useAuth();

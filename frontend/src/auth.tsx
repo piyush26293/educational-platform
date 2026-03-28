@@ -1,6 +1,7 @@
-import { createContext, PropsWithChildren, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import type { PropsWithChildren } from 'react';
 import { getMe, login, register } from './api';
-import { User } from './types';
+import type { User } from './types';
 
 type AuthContextValue = {
   user: User | null;
@@ -33,13 +34,12 @@ export function AuthProvider({ children }: PropsWithChildren) {
       return null;
     }
   });
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(() => !!localStorage.getItem('token'));
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-      setLoading(false);
       return;
     }
 
@@ -89,6 +89,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {

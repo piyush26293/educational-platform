@@ -1,4 +1,4 @@
-import {
+import type {
   AdminOverview,
   DashboardData,
   QuestionDetail,
@@ -14,13 +14,11 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3001';
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const token = localStorage.getItem('token');
-  const headers: HeadersInit = {
-    'Content-Type': 'application/json',
-    ...(init?.headers ?? {}),
-  };
+  const headers = new Headers(init?.headers);
+  headers.set('Content-Type', 'application/json');
 
   if (token) {
-    headers.Authorization = `Bearer ${token}`;
+    headers.set('Authorization', `Bearer ${token}`);
   }
 
   const response = await fetch(`${API_BASE}${path}`, {

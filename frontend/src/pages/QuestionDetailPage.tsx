@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getQuestion } from '../api';
-import { QuestionDetail } from '../types';
+import type { QuestionDetail } from '../types';
 
 export function QuestionDetailPage() {
   const { slug = '' } = useParams();

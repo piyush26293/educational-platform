@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAdminOverview } from '../api';
 import { useAuth } from '../auth';
-import { AdminOverview } from '../types';
+import type { AdminOverview } from '../types';
 
 export function AdminPage() {
   const { user } = useAuth();
