@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
+import rateLimit from 'express-rate-limit';
 import jwt from 'jsonwebtoken';
 import { getDb, initDb } from './database';
 
@@ -26,6 +27,23 @@ const jwtSecret = process.env.JWT_SECRET ?? 'dev-secret-change-me';
 
 app.use(cors());
 app.use(express.json());
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 300,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+app.use('/api', apiLimiter);
+app.use('/api/auth', authLimiter);
 
 function parseJson<T>(value: string | null | undefined, fallback: T): T {
   if (!value) return fallback;
